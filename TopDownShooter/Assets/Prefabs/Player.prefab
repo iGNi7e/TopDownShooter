@@ -74,8 +74,23 @@ GameObject:
   - component: {fileID: 23379012220579110}
   - component: {fileID: 114740226635163918}
   - component: {fileID: 143893457298670072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1989640004825934
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4310403519998314}
+  m_Layer: 0
+  m_Name: ShellSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,6 +109,19 @@ Transform:
   m_Father: {fileID: 4430637150696218}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4310403519998314
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989640004825934}
+  m_LocalRotation: {x: -0.16578817, y: 0.68739676, z: 0.1657882, w: 0.68739676}
+  m_LocalPosition: {x: 1.42, y: 0, z: 0.182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4430637150696218}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -27.12, y: 90.00001, z: 0}
 --- !u!4 &4430637150696218
 Transform:
   m_ObjectHideFlags: 1
@@ -105,6 +133,7 @@ Transform:
   m_LocalScale: {x: 0.15302765, y: 0.0959369, z: 1}
   m_Children:
   - {fileID: 4131996244510122}
+  - {fileID: 4310403519998314}
   m_Father: {fileID: 4984150646831014}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,7 +144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1875866566222716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0.045, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 4984150646831014}
@@ -324,6 +353,8 @@ MonoBehaviour:
   gunType: 0
   rpm: 600
   spawn: {fileID: 4131996244510122}
+  shellSpawn: {fileID: 4310403519998314}
+  shell: {fileID: 54179785992340482, guid: c3f8a2c30750df24ebc9eee931130c29, type: 2}
   clip: {fileID: 8300000, guid: 36098eb08a9885844aeb43fe3ad60ff8, type: 3}
 --- !u!114 &114740226635163918
 MonoBehaviour:
@@ -336,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b1fba9ec63b664281ffb6dd4902610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 450
+  rotationSpeed: 600
   walkSpeed: 5
   runSpeed: 9
   gun: {fileID: 114569023650235256}

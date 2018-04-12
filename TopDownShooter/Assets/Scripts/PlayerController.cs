@@ -38,10 +38,10 @@ public class PlayerController : MonoBehaviour
 
     void ControlMouse()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos = cam.ScreenToWorldPoint(new Vector3(mousePos.x,mousePos.y,cam.transform.position.y-transform.position.y));
-        targetRotation = Quaternion.LookRotation(mousePos -  new Vector3(transform.position.x,0,transform.position.z));
-        transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y,targetRotation.eulerAngles.y,rotationSpeed * Time.deltaTime);
+        Vector3 mousePos = Input.mousePosition; //получение координат положения мыши
+        mousePos = cam.ScreenToWorldPoint(new Vector3(mousePos.x,mousePos.y,cam.transform.position.y-transform.position.y)); //преобразование координат в мировые
+        targetRotation = Quaternion.LookRotation(mousePos -  new Vector3(transform.position.x,0,transform.position.z)); //кватернион направления поворота
+        transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y,targetRotation.eulerAngles.y,rotationSpeed * Time.deltaTime); //поворот
 
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
 

@@ -6,22 +6,24 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
 
-    public enum GunType { Semi, Burst, Auto }
+    public enum GunType { Semi, Burst, Auto } //виды стрельбы
     public GunType gunType;
-    public float rpm;
+    public float rpm; // частота выстрелов в секунду
 
     //Components
-    public Transform spawn;
-    public AudioClip clip;
-    private LineRenderer tracer;
+    public Transform spawn; //впавн выстрела
+    public Transform shellSpawn;
+    public Rigidbody shell;
+    public AudioClip clip; //звук стрельбы
+    private LineRenderer tracer; //отрисовка выстрела
 
     //System
-    private float secondsBetweenShots;
-    private float nextPossibleShootTime;
+    private float secondsBetweenShots; //сколько выстрелов в секунду
+    private float nextPossibleShootTime; //для определения возможности произведения выстрела
 
     private void Start()
     {
-        secondsBetweenShots = 60 / rpm;
+        secondsBetweenShots = 60 / rpm; //определние частоты выстрелов, конечное
         if (GetComponent<LineRenderer>())
         {
             tracer = GetComponent<LineRenderer>();
@@ -47,10 +49,13 @@ public class Gun : MonoBehaviour
 
             GetComponent<AudioSource>().PlayOneShot(clip);
             if (tracer) StartCoroutine("RendreTracer",ray.direction * distanceShot);
+
+            Rigidbody newShell = Instantiate(shell,shellSpawn.position,Quaternion.identity) as Rigidbody;
+            newShell.AddForce(shellSpawn.forward * Random.Range(150f,200f) + spawn.forward * Random.Range(-10f,10f));
         }
     }
 
-    IEnumerator RendreTracer(Vector3 hitPoint)
+    IEnumerator RendreTracer(Vector3 hitPoint) //отрисовка линии
     {
         tracer.enabled = true;
         tracer.SetPosition(0,spawn.position);
