@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : LivingEntity
 {
     private Quaternion targetRotation;
 
@@ -12,14 +12,16 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed = 5f;
     public float runSpeed = 9f;
 
-    public Gun gun;
+    private Gun gun;
     private Camera cam;
     private CharacterController controller;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
+        gun = GameObject.FindGameObjectWithTag("Gun").GetComponent<Gun>();
     }
 
     private void Update()

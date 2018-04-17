@@ -10,6 +10,9 @@ public class Gun : MonoBehaviour
     public GunType gunType;
     public float rpm; // частота выстрелов в секунду
 
+    //Prefabs
+    public Projectile projectile;
+
     //Components
     public Transform spawn; //впавн выстрела
     public Transform shellSpawn;
@@ -44,11 +47,14 @@ public class Gun : MonoBehaviour
             {
                 distanceShot = hit.distance;
             }
-            //Debug.DrawLine(ray.origin,ray.direction * distanceShot,Color.red,1);
+
             nextPossibleShootTime = Time.time * secondsBetweenShots;
 
             GetComponent<AudioSource>().PlayOneShot(clip);
-            if (tracer) StartCoroutine("RendreTracer",ray.direction * distanceShot);
+            //if (tracer) StartCoroutine("RendreTracer",ray.direction * distanceShot);
+
+            Projectile newProjectile = Instantiate(projectile,spawn.transform.position,spawn.rotation);
+            newProjectile.SetSpeed(10f);
 
             Rigidbody newShell = Instantiate(shell,shellSpawn.position,Quaternion.identity) as Rigidbody;
             newShell.AddForce(shellSpawn.forward * Random.Range(150f,200f) + spawn.forward * Random.Range(-10f,10f));
