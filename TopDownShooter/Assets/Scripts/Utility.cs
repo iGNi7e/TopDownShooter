@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 
 public static class Utility {
-
+    //Алгоритм тасование Фишера - Йетса
 	public static T[] ShuffleArray<T>(T[] array, int seed)
     {
         System.Random prng = new System.Random(seed);
