@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour {
             IDamageable damageableObject = other.GetComponent<IDamageable>();
             if(damageableObject != null)
             {
-                damageableObject.TakeHit(damage);
+                damageableObject.TakeHit(damage,transform.position,transform.forward);
             }
             //Destroy(other.gameObject);
         }
