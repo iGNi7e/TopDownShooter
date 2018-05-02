@@ -19,6 +19,7 @@ public class Gun : MonoBehaviour
     public Rigidbody shell;
     public AudioClip clip; //звук стрельбы
     private LineRenderer tracer; //отрисовка выстрела
+    MuzzleFlash muzzleFlash;
 
     //System
     private float secondsBetweenShots; //сколько выстрелов в секунду
@@ -26,6 +27,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        muzzleFlash = GetComponent<MuzzleFlash>();
         secondsBetweenShots = 60 / rpm; //определние частоты выстрелов, конечное
         if (GetComponent<LineRenderer>())
         {
@@ -48,7 +50,7 @@ public class Gun : MonoBehaviour
                 distanceShot = hit.distance;
             }
 
-            nextPossibleShootTime = Time.time * secondsBetweenShots;
+            nextPossibleShootTime = Time.time + secondsBetweenShots;
 
             GetComponent<AudioSource>().PlayOneShot(clip);
             //if (tracer) StartCoroutine("RendreTracer",ray.direction * distanceShot);
@@ -58,6 +60,8 @@ public class Gun : MonoBehaviour
 
             Rigidbody newShell = Instantiate(shell,shellSpawn.position,Quaternion.identity) as Rigidbody;
             newShell.AddForce(shellSpawn.forward * Random.Range(150f,200f) + spawn.forward * Random.Range(-10f,10f));
+
+            muzzleFlash.Activate();
         }
     }
 

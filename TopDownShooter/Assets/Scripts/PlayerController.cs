@@ -8,6 +8,8 @@ public class PlayerController : LivingEntity
 {
     private Quaternion targetRotation;
 
+    public Transform crosshair;
+
     public float rotationSpeed = 450f;
     public float walkSpeed = 5f;
     public float runSpeed = 9f;
@@ -44,6 +46,8 @@ public class PlayerController : LivingEntity
         mousePos = cam.ScreenToWorldPoint(new Vector3(mousePos.x,mousePos.y,cam.transform.position.y-transform.position.y)); //преобразование координат в мировые
         targetRotation = Quaternion.LookRotation(mousePos -  new Vector3(transform.position.x,0,transform.position.z)); //кватернион направления поворота
         transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y,targetRotation.eulerAngles.y,rotationSpeed * Time.deltaTime); //поворот
+
+        crosshair.position = mousePos;
 
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
 
